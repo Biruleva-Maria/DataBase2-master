@@ -3,6 +3,7 @@ CREATE TABLE brand(
 	name varchar (255) NOT NULL,
 	country varchar (255) NOT NULL
 );
+
 CREATE TABLE car (
 	id SERIAL PRIMARY KEY,
 	brand_id INTEGER NOT NULL REFERENCES brand(id) ,

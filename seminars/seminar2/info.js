@@ -5,8 +5,10 @@ const a={
 console.log(a.first)
 
 let first=a.first
+
 console.log(firstVar)
-const {first}=a
+
+const {first: firstL, second}=a
 console.log(firstL)
 console.log(second)
 

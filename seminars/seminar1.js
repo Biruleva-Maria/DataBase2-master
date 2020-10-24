@@ -12,19 +12,24 @@ const g=[1,2]
 console.log(g)
 g.push(3)
 console.log(g)
+
 // t=[3,4] так нельзя
 
 const obj={
     a:1,
     b:3
 }
+
 /* так нельзя
 const obj={
     c:1, 
 } 
 */
+
 console.log(obj)
+
 obj.c=2
+
 console.log(obj)
 console.log(obj.a)
 
@@ -34,10 +39,12 @@ const studebt ={
 }
 
 //возможный вариант
+
 let formattedStr = "Имя "+ studebt.name+" Фамилия "+ studebt.surname
 console.log(formattedStr)
 
 //наилучший вариант
+
 formattedStr=`Name ${studebt.name}, Surname ${studebt.surnamename}`
 console.log(formattedStr)
 
@@ -62,6 +69,7 @@ console.log('1' + '1')
 // == с приведение типов
 one =1
 two=1
+
 if (one==two){
     console.log('its equal')
 }
@@ -76,3 +84,9 @@ let fl=undefined
 if(!fl){
     console.log('its falsy')
 }
+
+const obj1 = {
+    a: 1
+}
+
+console.log(obj1.b.c)

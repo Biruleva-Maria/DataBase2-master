@@ -8,9 +8,13 @@ const client = new Client({
     database: process.env.DB_DATEBASE,
 })
 
-const name = '1 or 1 = 1'
+//const name = '1 or 1 = 1'
 
 client.connect()
+
+//1. Дабавить новый автомобиль
+//2. Получить данного свободного менеджера
+//3. Назначить ему для продажи новый автомобиль
 
 async function addCar() {
     const car = {
@@ -31,16 +35,19 @@ async function addCar() {
             [car.brandID, car.model, car.cost, car.year, car.isAvaible]
         )
 
-        throw 'ERROR!!!!'
+        //throw 'ERROR!!!!'
         const carID = res.row[0].id
+        console.log('get carID:', carID)
 
         const resManagerID = await client.query(`
         SELECT *
         FROM manager
         Whare car_id IS NULL
-        LIMIT 1`)
+        LIMIT 1
+        `)
 
         const managerID = resManagerId.rows[0].id
+        console.log('get managerID', managerID)
 
         await client.query(
             `
@@ -49,12 +56,16 @@ async function addCar() {
         WHERE id=$2`,
             [carID, managerID]
         )
+
         await client.query('COMMIT')
+        console.log('commit')
     } catch (err) {
-        client.query('ROllBACK')
-        throw err
+        console.error(err)
+        await client.query('ROllBACK')
+        console.log('rollback')
     } finally {
-        client.end()
+        await client.end()
+        console.log('close connection')
     }
 }
 
@@ -78,10 +89,6 @@ WHERE name= $1`,
 //1. Получить все ID машинб старше 2018
 //2. Снизить цену на полученные авто на 5%
 
-//1. Дабавить новый автомобиль
-//2. Получить данного свободного менеджера
-//3. Назначить ему для продажи новый автомобиль
-
 /*client.query(
     `
     SELECT * 
@@ -94,9 +101,7 @@ WHERE name= $1`,
         client.end()
     }
 )*/
-
-console.log(1)
-
+//console.log(1)
 /*query(query, cb){
     ...
     ...
